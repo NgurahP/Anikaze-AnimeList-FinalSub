@@ -1,11 +1,12 @@
 "use client";
 import Navbar from "./components/navbar";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
+import Image from "next/image";
 
 export default function Home() {
   const [topAnime, setTopAnime] = useState([]);
@@ -126,7 +127,7 @@ export default function Home() {
           {topAnime.map((top: any) => (
             <SwiperSlide key={top.mal_id}>
               <div>
-                <img
+                <Image
                   src={top.images.webp.large_image_url}
                   alt={top.title}
                   className="h-[20rem] w-auto object-cover"
@@ -150,7 +151,7 @@ export default function Home() {
           {season.map((season: any) => (
             <SwiperSlide key={season.mal_id}>
               <div>
-                <img
+                <Image
                   src={season.images.webp.large_image_url}
                   alt={season.title}
                   className="h-[20rem] w-auto object-cover"
