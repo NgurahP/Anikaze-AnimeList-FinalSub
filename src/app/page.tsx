@@ -9,9 +9,27 @@ import { Autoplay, Navigation } from "swiper/modules";
 import Image from "next/image";
 
 export default function Home() {
-  const [topAnime, setTopAnime] = useState([]);
-  const [carousel, setCarousel] = useState([]);
-  const [season, setSeason] = useState([]);
+  interface Anime {
+    mal_id: number;
+    title: string;
+    title_japanese: string;
+    synopsis: string;
+    images: {
+      webp: {
+        large_image_url: string;
+      };
+    };
+    trailer: {
+      images: {
+        large_image_url: string | null;
+        maximum_image_url: string;
+      };
+    };
+  }
+
+  const [topAnime, setTopAnime] = useState<Anime[]>([]);
+  const [carousel, setCarousel] = useState<Anime[]>([]);
+  const [season, setSeason] = useState<Anime[]>([]);
   // const [loading, setLoading] = useState(true);
   // const [currentPage, setCurrentPage] = useState(1);
   // const [totalPages, setTotalPages] = useState(0);
