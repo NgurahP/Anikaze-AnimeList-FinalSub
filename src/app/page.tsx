@@ -86,7 +86,7 @@ export default function Home() {
           autoplay={{ delay: 3500 }}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}>
-          {carousel.map((movie: any) => (
+          {carousel.map((movie: Anime) => (
             <SwiperSlide key={movie.mal_id}>
               <div
                 className="relative w-full h-screen bg-cover bg-center bg-no-repeat"
@@ -142,7 +142,7 @@ export default function Home() {
           spaceBetween={10}
           slidesPerView={7}
           navigation>
-          {topAnime.map((top: any) => (
+          {topAnime.map((top: Anime) => (
             <SwiperSlide key={top.mal_id}>
               <div>
                 <Image
@@ -166,7 +166,7 @@ export default function Home() {
           spaceBetween={10}
           slidesPerView={7}
           navigation>
-          {season.map((season: any) => (
+          {season.map((season: Anime) => (
             <SwiperSlide key={season.mal_id}>
               <div>
                 <Image
@@ -186,7 +186,7 @@ export default function Home() {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          movies.map((movie: any) => (
+          movies.map((movie: Anime) => (
             <ul key={movie.mal_id}>
               <li className="py-2">
                 <img
