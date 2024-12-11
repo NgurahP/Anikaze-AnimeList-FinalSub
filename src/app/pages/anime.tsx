@@ -1,14 +1,13 @@
 "use client";
 import { useState } from "react";
-import Navbar from "./components/navbar";
 
 export default function Anime() {
   const [open, setOpen] = useState(false);
+
   return (
-    <div>
-      <Navbar />
-      <div>
-        <div>
+    <div className={`w-full h-screen`}>
+      <div  className="w-full h-screen">
+        <div className="bg-[#2f2f2f]">
           <button onClick={() => setOpen(!open)} className="">
             Genre{" "}
             <span
