@@ -6,21 +6,21 @@ import { useState } from "react";
 interface NavbarProps {
   onSelectSection: (section: string) => void;
 }
-const [navbar, setNavbar] = useState(false);
-const navChange = () => {
-  if (window.pageYOffset >= 1320) {
-    setNavbar(true);
-  } else if (window.pageYOffset >= 800) {
-    setNavbar(true);
-  } else if (window.pageYOffset >= 600) {
-    setNavbar(true);
-  } else {
-    setNavbar(false);
-  }
-};
-window.addEventListener("scroll", navChange);
 
 function Navbar({ onSelectSection }: NavbarProps) {
+  const [navbar, setNavbar] = useState(false);
+  const navChange = () => {
+    if (window.pageYOffset >= 1320) {
+      setNavbar(true);
+    } else if (window.pageYOffset >= 800) {
+      setNavbar(true);
+    } else if (window.pageYOffset >= 600) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+  window.addEventListener("scroll", navChange);
   return (
     <nav
       className={`w-full bg-transparent border-gray-200 dark:bg-gray-900 z-20 ${
