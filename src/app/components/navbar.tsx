@@ -1,7 +1,7 @@
 import Link from "next/link";
 import logo from "./img/nav-logo-red.png";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface NavbarProps {
   onSelectSection: (section: string) => void;
@@ -9,27 +9,27 @@ interface NavbarProps {
 
 function Navbar({ onSelectSection }: NavbarProps) {
   const [navbar, setNavbar] = useState(false);
-  const navChange = () => {
-    if (window.pageYOffset >= 1320) {
-      setNavbar(true);
-    } else if (window.pageYOffset >= 800) {
-      setNavbar(true);
-    } else if (window.pageYOffset >= 600) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
-  window.addEventListener("scroll", navChange);
+  useEffect(() => {
+    const navChange = () => {
+      if (window.pageYOffset >= 10 || window.pageYOffset >= 800 || window.pageYOffset >= 600) {
+        setNavbar(true);
+      } else {
+        setNavbar(false);
+      }
+    };window.addEventListener("scroll", navChange);
+    return () => {
+      window.removeEventListener("scroll", navChange);
+    };
+  }, []);
   return (
     <nav
-      className={`w-full bg-transparent border-gray-200 dark:bg-gray-900 z-20 ${
-        navbar ? `fixed` : ``
+      className={`w-full h-[5rem] border-gray-200 z-20 transition duration-300 items-center ${
+        navbar ? `fixed bg-transparent backdrop-blur-lg` : `sticky bg-gray-800`
       }`}>
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="max-w-screen-xl h-[5rem] flex flex-wrap items-center justify-between mx-auto">
         <Link
-          href="./"
-          className="flex items-center space-x-3 rtl:space-x-reverse relative">
+          href="/"
+          className="flex items-center space-x-3 relative">
           <Image
             src={logo}
             className="pl-8"
@@ -37,7 +37,7 @@ function Navbar({ onSelectSection }: NavbarProps) {
             height={64}
             width={149}
           />
-          <span className="absolute self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white">
+          <span className="absolute self-center text-2xl font-semibold whitespace-nowrap text-white">
             AniKaze
           </span>
         </Link>
