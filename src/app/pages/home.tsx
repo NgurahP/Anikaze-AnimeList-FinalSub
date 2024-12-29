@@ -30,7 +30,7 @@ interface homeType {
 
 export default function Home({ topAnime, carousel, season }: homeType) {
   return (
-    <>
+    <div className="bg-gray-600">
       <div className="w-full h-full">
         <Swiper
           modules={[Autoplay]}
@@ -139,6 +139,6 @@ export default function Home({ topAnime, carousel, season }: homeType) {
           ))}
         </Swiper>
       </div>
-    </>
+    </div>
   );
 }
