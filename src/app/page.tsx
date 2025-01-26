@@ -10,7 +10,7 @@ export default function Page() {
   const [topAnime, setTopAnime] = useState([]);
   const [carousel, setCarousel] = useState([]);
   const [season, setSeason] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
+  // const [searchResults, setSearchResults] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
 
   async function fetchData() {
