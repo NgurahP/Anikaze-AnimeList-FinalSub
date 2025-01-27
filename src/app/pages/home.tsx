@@ -66,7 +66,7 @@ export default function Home({ topAnime, carousel, season }: homeType) {
                     {movie.synopsis.length > 350 ? (
                       <p className="text-[13px] md:text-[17px] text-neutral-200 md:max-w-[650px] lg:max-w-[780px]">
                         {movie.synopsis.substring(0, 350)}...&nbsp;
-                        <span className="text-violet-500 hover:text-violet-600 transition-colors duration-300 ease-in-out font-bold">
+                        <span className="text-violet-500 hover:text-violet-600 transition-colors duration-300 ease-in-out font-bold cursor-pointer">
                           Read More
                         </span>
                       </p>
@@ -78,11 +78,6 @@ export default function Home({ topAnime, carousel, season }: homeType) {
                   </div>
                 </div>
               </div>
-              {/* <img
-                src={movie.trailer.images.large_image_url}
-                alt={movie.title_english}
-                className="w-full h-full object-cover"
-                /> */}
             </SwiperSlide>
           ))}
         </Swiper>
