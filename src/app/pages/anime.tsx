@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 
 interface Anime {
   score: number;
@@ -23,12 +22,6 @@ interface Anime {
 }
 
 export default function Anime() {
-  // const [query, setQuery] = useState("");
-
-  // const handleSearch = (e) => {
-  //   e.preventDefault();
-  //   onSearch(query);
-  // };
   return (
     <div className={`w-full h-screen`}>
       <div className="w-full h-screen">

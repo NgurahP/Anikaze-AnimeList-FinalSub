@@ -21,9 +21,6 @@ export default function Page() {
           AnimeData("anime", "order_by=favorites&sort=desc&limit=7"),
           AnimeData("anime", "status=airing&order_by=popularity&limit=20"),
         ]);
-
-        
-
         setTopAnime(topAnimeData.data);
         setCarousel(carouselData.data);
         setSeason(seasonData.data || []);
