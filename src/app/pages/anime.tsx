@@ -1,38 +1,50 @@
 "use client";
-
-interface Anime {
-  score: number;
-  title_english: string | undefined;
-  mal_id: number;
-  title: string;
-  title_japanese: string;
-  synopsis: string;
-  images: {
-    webp: {
-      image_url: string;
-      large_image_url: string;
-    };
-  };
-  trailer: {
-    images: {
-      large_image_url: string | null;
-      maximum_image_url: string;
-    };
-  };
-}
+import { useEffect, useState } from "react";
+import { AnimeData } from "@/api/fetch";
+import type { AnimeType } from "@/types/type";
 
 export default function Anime() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [animeData, setAnimeData] = useState<AnimeType[]>([]);
+  const [metadata, setMetadata] = useState({
+    title: "AniKaze - ",
+    description: "Search for your favorite anime.",
+  });
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm) {
+      const searchData = await AnimeData(`anime`, `q=${searchTerm}`);
+      setAnimeData(searchData.data);
+      if (searchData.data.length > 0) {
+        setMetadata({
+          title: `AniKaze - ${searchTerm}`,
+          description: searchData.data[0].synopsis,
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    document.title = metadata.title;
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", metadata.description);
+    }
+  }, [metadata]);
+
   return (
     <div className={`w-full h-screen`}>
       <div className="w-full h-screen">
         <div className="bg-[#2f2f2f] flex justify-center items-center">
-          <form  method="post">
+          <form onSubmit={handleSearch}>
             <input
               type="text"
-              
               name="search"
               id="search"
-              
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search for anime..."
             />
             <button type="submit">
               <svg
@@ -52,24 +64,21 @@ export default function Anime() {
             </button>
           </form>
         </div>
-      </div>
-      {/* <div className="search-results">
-        {searchResults.length > 0 ? (
-          searchResults.map((anime: Anime) => (
-            <div key={anime.mal_id} className="anime-item">
-              <img
-                src={anime.images.webp.image_url}
-                alt={anime.title_english}
-                className="w-full h-96 object-cover"
-              />
-              <div className="font-bold truncate">{anime.title}</div>
-              <div className="">{anime.score}</div>
-            </div>
-          ))
-        ) : (
-          <p>No results found</p>
+        {animeData && (
+          <div className="w-full grid grid-cols-5">
+            {animeData.map((anime) => (
+              <div key={anime.mal_id} className="grid grid-cols-5">
+                <img
+                  src={anime.images.webp.large_image_url}
+                  alt={anime.title}
+                  className="h-[20rem] w-auto object-cover"
+                />
+                <h2>{anime.title}</h2>
+              </div>
+            ))}
+          </div>
         )}
-      </div> */}
+      </div>
     </div>
   );
 }

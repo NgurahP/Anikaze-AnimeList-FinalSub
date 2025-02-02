@@ -11,12 +11,17 @@ function Navbar({ onSelectSection }: NavbarProps) {
   const [navbar, setNavbar] = useState(false);
   useEffect(() => {
     const navChange = () => {
-      if (window.pageYOffset >= 10 || window.pageYOffset >= 800 || window.pageYOffset >= 600) {
+      if (
+        window.pageYOffset >= 10 ||
+        window.pageYOffset >= 800 ||
+        window.pageYOffset >= 600
+      ) {
         setNavbar(true);
       } else {
         setNavbar(false);
       }
-    };window.addEventListener("scroll", navChange);
+    };
+    window.addEventListener("scroll", navChange);
     return () => {
       window.removeEventListener("scroll", navChange);
     };
@@ -24,12 +29,12 @@ function Navbar({ onSelectSection }: NavbarProps) {
   return (
     <nav
       className={`w-full h-[5rem] border-gray-200 z-20 transition duration-300 items-center ${
-        navbar ? `fixed bg-transparent backdrop-blur-lg` : `sticky bg-gray-800`
+        navbar
+          ? `fixed bg-transparent backdrop-blur-lg opacity-100 translate-y-0`
+          : `fixed bg-transparent backdrop-blur-lg opacity-0 -translate-y-full`
       }`}>
       <div className="max-w-screen-xl h-[5rem] flex flex-wrap items-center justify-between mx-auto">
-        <Link
-          href="/"
-          className="flex items-center space-x-3 relative">
+        <Link href="/" className="flex items-center space-x-3 relative">
           <Image
             src={logo}
             className="pl-8"

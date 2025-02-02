@@ -4,28 +4,12 @@ import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
 import Image from "next/image";
+import type { AnimeType } from "@/types/type";
 
-interface Anime {
-  mal_id: number;
-  title: string;
-  title_japanese: string;
-  synopsis: string;
-  images: {
-    webp: {
-      large_image_url: string;
-    };
-  };
-  trailer: {
-    images: {
-      large_image_url: string | null;
-      maximum_image_url: string;
-    };
-  };
-}
 interface homeType {
-  topAnime: Anime[];
-  carousel: Anime[];
-  season: Anime[];
+  topAnime: AnimeType[];
+  carousel: AnimeType[];
+  season: AnimeType[];
 }
 
 export default function Home({ topAnime, carousel, season }: homeType) {
@@ -39,7 +23,7 @@ export default function Home({ topAnime, carousel, season }: homeType) {
           autoplay={{ delay: 3500 }}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}>
-          {carousel.map((movie: Anime) => (
+          {carousel.map((movie: AnimeType) => (
             <SwiperSlide key={movie.mal_id}>
               <div
                 className="relative w-full h-screen bg-cover bg-center bg-no-repeat"
@@ -90,7 +74,7 @@ export default function Home({ topAnime, carousel, season }: homeType) {
           spaceBetween={10}
           slidesPerView={7}
           navigation>
-          {topAnime.map((top: Anime) => (
+          {topAnime.map((top: AnimeType) => (
             <SwiperSlide key={top.mal_id}>
               <div>
                 <Image
@@ -116,7 +100,7 @@ export default function Home({ topAnime, carousel, season }: homeType) {
           spaceBetween={10}
           slidesPerView={7}
           navigation>
-          {season.map((season: Anime) => (
+          {season.map((season: AnimeType) => (
             <SwiperSlide key={season.mal_id}>
               <div>
                 <Image
