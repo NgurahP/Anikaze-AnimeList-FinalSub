@@ -21,7 +21,6 @@ export default function Home({ topAnime, carousel, season }: homeType) {
           spaceBetween={50}
           slidesPerView={1}
           autoplay={{ delay: 3500 }}
-          onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}>
           {carousel.map((movie: AnimeType) => (
             <SwiperSlide key={movie.mal_id}>

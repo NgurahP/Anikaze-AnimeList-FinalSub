@@ -34,8 +34,8 @@ export default function Anime() {
   }, [metadata]);
 
   return (
-    <div className={`w-full h-screen`}>
-      <div className="w-full h-screen">
+    <div className={`w-full h-auto bg-gray-600`}>
+      <div className="w-full h-auto">
         <div className="bg-[#2f2f2f] flex justify-center items-center">
           <form onSubmit={handleSearch}>
             <input
@@ -67,13 +67,15 @@ export default function Anime() {
         {animeData && (
           <div className="w-full grid grid-cols-5">
             {animeData.map((anime) => (
-              <div key={anime.mal_id} className="grid grid-cols-5">
+              <div
+                key={anime.mal_id}
+                className="w-[90%] flex justify-center pl-8 pr-4 py-3">
                 <img
                   src={anime.images.webp.large_image_url}
                   alt={anime.title}
                   className="h-[20rem] w-auto object-cover"
                 />
-                <h2>{anime.title}</h2>
+                {/* <h2>{anime.title}</h2> */}
               </div>
             ))}
           </div>
