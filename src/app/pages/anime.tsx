@@ -82,6 +82,7 @@ export default function Anime({ topAnime }: AnimeProps) {
                     alt={anime.title}
                     className="h-[20rem] w-auto object-cover"
                   />
+                  <h2>{anime.title}</h2>
                 </div>
               ))
             : animeData.map((anime) => (
@@ -93,6 +94,7 @@ export default function Anime({ topAnime }: AnimeProps) {
                     alt={anime.title}
                     className="h-[20rem] w-auto object-cover"
                   />
+                  <h2>{anime.title}</h2>
                 </div>
               ))}
         </div>
