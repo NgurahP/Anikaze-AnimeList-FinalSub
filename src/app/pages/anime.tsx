@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import { AnimeData } from "@/api/fetch";
 import type { AnimeType } from "@/types/type";
 
-export default function Anime() {
+interface AnimeProps {
+  topAnime: AnimeType[];
+}
+
+export default function Anime({ topAnime }: AnimeProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [animeData, setAnimeData] = useState<AnimeType[]>([]);
   const [metadata, setMetadata] = useState({
@@ -22,6 +26,8 @@ export default function Anime() {
           description: searchData.data[0].synopsis,
         });
       }
+    } else {
+      setAnimeData([]);
     }
   };
 
@@ -64,22 +70,32 @@ export default function Anime() {
             </button>
           </form>
         </div>
-        {animeData && (
-          <div className="w-full grid grid-cols-5">
-            {animeData.map((anime) => (
-              <div
-                key={anime.mal_id}
-                className="w-[90%] flex justify-center pl-8 pr-4 py-3">
-                <img
-                  src={anime.images.webp.large_image_url}
-                  alt={anime.title}
-                  className="h-[20rem] w-auto object-cover"
-                />
-                {/* <h2>{anime.title}</h2> */}
-              </div>
-            ))}
-          </div>
-        )}
+
+        <div className="w-full grid grid-cols-5">
+          {!animeData.length || searchTerm === ""
+            ? topAnime.map((anime) => (
+                <div
+                  key={anime.mal_id}
+                  className="w-[90%] flex justify-center pl-8 pr-4 py-3">
+                  <img
+                    src={anime.images.webp.large_image_url}
+                    alt={anime.title}
+                    className="h-[20rem] w-auto object-cover"
+                  />
+                </div>
+              ))
+            : animeData.map((anime) => (
+                <div
+                  key={anime.mal_id}
+                  className="w-[90%] flex justify-center pl-8 pr-4 py-3">
+                  <img
+                    src={anime.images.webp.large_image_url}
+                    alt={anime.title}
+                    className="h-[20rem] w-auto object-cover"
+                  />
+                </div>
+              ))}
+        </div>
       </div>
     </div>
   );
