@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { AnimeData } from "@/api/fetch";
 import type { AnimeType } from "@/types/type";
+import Image from "next/image";
 
 interface AnimeProps {
   topAnime: AnimeType[];
@@ -43,11 +44,12 @@ export default function Anime({ topAnime }: AnimeProps) {
     <div className={`w-full h-auto bg-gray-600`}>
       <div className="w-full h-auto">
         <div className="bg-[#2f2f2f] flex justify-center items-center">
-          <form onSubmit={handleSearch}>
+          <form onSubmit={handleSearch} className="w-full flex justify-center">
             <input
               type="text"
               name="search"
               id="search"
+              className="px-5 py-3 bg-slate-600 rounded-full w-[30%]"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search for anime..."
@@ -76,25 +78,31 @@ export default function Anime({ topAnime }: AnimeProps) {
             ? topAnime.map((anime) => (
                 <div
                   key={anime.mal_id}
-                  className="w-[90%] flex justify-center pl-8 pr-4 py-3">
-                  <img
+                  className="w-[90%] flex flex-col justify-center pl-8 pr-4 py-3">
+                  <Image
+                    width={320}
+                    height={160}
+                    layout="responsive"
                     src={anime.images.webp.large_image_url}
                     alt={anime.title}
                     className="h-[20rem] w-auto object-cover"
                   />
-                  <h2>{anime.title}</h2>
+                  <h2 className="truncate">{anime.title}</h2>
                 </div>
               ))
             : animeData.map((anime) => (
                 <div
                   key={anime.mal_id}
-                  className="w-[90%] flex justify-center pl-8 pr-4 py-3">
-                  <img
+                  className="w-[90%] flex flex-col justify-center pl-8 pr-4 py-3">
+                  <Image
+                    width={320}
+                    height={160}
+                    layout="responsive"
                     src={anime.images.webp.large_image_url}
                     alt={anime.title}
                     className="h-[20rem] w-auto object-cover"
                   />
-                  <h2>{anime.title}</h2>
+                  <h2 className="truncate">{anime.title}</h2>
                 </div>
               ))}
         </div>

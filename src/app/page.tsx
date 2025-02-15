@@ -46,7 +46,7 @@ export default function Page() {
       {currentSection === "home" && (
         <Home topAnime={topAnime} carousel={carousel} season={season} />
       )}
-      {currentSection === "anime" && <Anime topAnime ={topAnime} />}
+      {currentSection === "anime" && <Anime topAnime={topAnime} />}
       <Footer />
     </div>
   );

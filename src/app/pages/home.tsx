@@ -1,10 +1,11 @@
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
-import Image from "next/image";
-import type { AnimeType } from "@/types/type";
+import type { AnimeType } from "../types/type";
+import { AnimeSwiper } from "../components/overlay";
 
 interface homeType {
   topAnime: AnimeType[];
@@ -75,18 +76,9 @@ export default function Home({ topAnime, carousel, season }: homeType) {
           navigation>
           {topAnime.map((top: AnimeType) => (
             <SwiperSlide key={top.mal_id}>
-              <div>
-                <Image
-                  src={top.images.webp.large_image_url}
-                  alt={top.title}
-                  className="object-cover w-auto h-[20rem]"
-                  height={320}
-                  width={160}
-                />
-                <div className="">
-                  <p className="truncate">{top.title}</p>
-                </div>
-              </div>
+              <AnimeSwiper anime={top} onAnimeClick={function (anime: AnimeType): void {
+                throw new Error("Function not implemented.");
+              } } />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -101,18 +93,9 @@ export default function Home({ topAnime, carousel, season }: homeType) {
           navigation>
           {season.map((season: AnimeType) => (
             <SwiperSlide key={season.mal_id}>
-              <div>
-                <Image
-                  src={season.images.webp.large_image_url}
-                  alt={season.title}
-                  className="h-[20rem] w-auto object-cover"
-                  height={320}
-                  width={160}
-                />
-                <div className="">
-                  <p className="truncate">{season.title}</p>
-                </div>
-              </div>
+              <AnimeSwiper anime={season} onAnimeClick={function (anime: AnimeType): void {
+                throw new Error("Function not implemented.");
+              } } />
             </SwiperSlide>
           ))}
         </Swiper>
