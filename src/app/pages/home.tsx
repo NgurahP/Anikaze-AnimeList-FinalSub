@@ -5,7 +5,7 @@ import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
 import type { AnimeType } from "../types/type";
-import { AnimeSwiper } from "../components/overlay";
+import { AnimeSwiper, OverlayDetail } from "../components/overlay";
 
 interface homeType {
   topAnime: AnimeType[];
@@ -14,6 +14,16 @@ interface homeType {
 }
 
 export default function Home({ topAnime, carousel, season }: homeType) {
+  const [selectedAnime, setSelectedAnime] = useState<AnimeType | null>(null);
+
+  const handleAnimeClick = (anime: AnimeType) => {
+    setSelectedAnime(anime);
+  };
+
+  const handleCloseOverlay = () => {
+    setSelectedAnime(null);
+  };
+
   return (
     <div className="bg-gray-600">
       <div className="w-full h-full">
@@ -76,9 +86,10 @@ export default function Home({ topAnime, carousel, season }: homeType) {
           navigation>
           {topAnime.map((top: AnimeType) => (
             <SwiperSlide key={top.mal_id}>
-              <AnimeSwiper anime={top} onAnimeClick={function (anime: AnimeType): void {
-                throw new Error("Function not implemented.");
-              } } />
+              <AnimeSwiper
+                anime={top}
+                onAnimeClick={handleAnimeClick} // Pass the click handler
+              />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -93,13 +104,19 @@ export default function Home({ topAnime, carousel, season }: homeType) {
           navigation>
           {season.map((season: AnimeType) => (
             <SwiperSlide key={season.mal_id}>
-              <AnimeSwiper anime={season} onAnimeClick={function (anime: AnimeType): void {
-                throw new Error("Function not implemented.");
-              } } />
+              <AnimeSwiper
+                anime={season}
+                onAnimeClick={handleAnimeClick} // Pass the click handler
+              />
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
+
+      {/* Render OverlayDetail if selectedAnime is not null */}
+      {selectedAnime && (
+        <OverlayDetail anime={selectedAnime} onClose={handleCloseOverlay} />
+      )}
     </div>
   );
 }
