@@ -1,6 +1,5 @@
 import Image from "next/image";
 import type { AnimeType } from "../types/type";
-import { useState } from "react";
 
 interface AnimeOverlayProps {
   anime: AnimeType;
