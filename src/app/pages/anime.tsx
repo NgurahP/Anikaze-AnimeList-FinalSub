@@ -19,10 +19,10 @@ export default function Anime({ topAnime }: AnimeProps) {
   const [selectedAnime, setSelectedAnime] = useState<AnimeType | null>(null);
   const [showOverlay, setShowOverlay] = useState(false);
 
-  const handleAnimeClick = (anime: AnimeType) => {
-    setSelectedAnime(anime);
-    setShowOverlay(true);
-  };
+  // const handleAnimeClick = (anime: AnimeType) => {
+  //   setSelectedAnime(anime);
+  //   setShowOverlay(true);
+  // };
 
   const handleCloseOverlay = () => {
     setShowOverlay(false);
