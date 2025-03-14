@@ -18,7 +18,7 @@ const AnimeSwiper: React.FC<AnimeOverlayProps> = ({ anime, onAnimeClick }) => {
 
   return (
     <div
-      className="flex items-center justify-center w-full"
+      className="flex cursor-pointer items-center justify-center w-full"
       onClick={handleClick}>
       <div className="relative rounded-lg w-full">
         <Image
